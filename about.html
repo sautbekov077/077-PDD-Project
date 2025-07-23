@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Біз туралы - 077 PDD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://t.me/c/2671263861/3family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 25%, #1e40af 50%, #1e3a8a 75%, #1e1b4b 100%);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    }
+    
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes pulseGlow {
+      from { text-shadow: 0 0 5px #fbbf24, 0 0 10px #fbbf24, 0 0 15px #fbbf24; }
+      to { text-shadow: 0 0 10px #fbbf24, 0 0 20px #fbbf24, 0 0 30px #fbbf24; }
+    }
+    
+    .morphing-button {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .morphing-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .morphing-button:hover::before {
+      left: 100%;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #fbbf24;
+      border-radius: 50%;
+      animation: particleFloat 4s ease-in-out infinite;
+    }
+    
+    @keyframes particleFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+      50% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
+    }
+    
+    .neon-border {
+      border: 2px solid transparent;
+      background: linear-gradient(45deg, #fbbf24, #f59e0b) padding-box, 
+                  linear-gradient(45deg, #fbbf24, #f59e0b, #fbbf24) border-box;
+      animation: neonPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes neonPulse {
+      0%, 100% { box-shadow: 0 0 5px #fbbf24, inset 0 0 5px #fbbf24; }
+      50% { box-shadow: 0 0 20px #fbbf24, inset 0 0 10px #fbbf24; }
+    }
+    
+    .text-gradient {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: textShine 3s ease-in-out infinite;
+    }
+    
+    @keyframes textShine {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    .icon-bounce {
+      animation: iconBounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes iconBounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+    
+    .progressive-blur {
+      backdrop-filter: blur(10px);
+      transition: backdrop-filter 0.3s ease;
+    }
+    
+    .progressive-blur:hover {
+      backdrop-filter: blur(20px);
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding-left: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+      z-index: 2;
+    }
+    
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 9px;
+      top: 20px;
+      width: 2px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .timeline-item:last-child::after {
+      display: none;
+    }
+  </style>
+</head>
+<body class="gradient-bg text-white min-h-screen overflow-x-hidden">
+  <!-- Floating particles -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+    <div class="particle" style="top: 70%; left: 20%; animation-delay: 2s;"></div>
+    <div class="particle" style="top: 80%; left: 70%; animation-delay: 3s;"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="fixed top-0 w-full glass-effect z-50 transition-all duration-300" id="header">
+    <div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+      <div class="flex items-center space-x-3">
+        <img src="logo.png" alt="PDD Logo" class="w-10 h-10 object-contain" />
+        <h1 class="text-2xl font-bold text-gradient">077 PDD</h1>
+      </div>
+      <nav class="hidden md:flex space-x-8">
+        <a href="index.html" class="hover:text-yellow-400 transition-all duration-300 hover:scale-105 relative group">
+          Басты бет
+          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+      </nav>
+      <button class="md:hidden text-white" id="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative text-center py-32 px-4 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-400 to-transparent opacity-10 transform -skew-y-1"></div>
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <div class="floating">
+        <h2 class="text-5xl md:text-7xl font-bold text-gradient mb-6 pulse-glow">
+          Біз туралы
+          <span class="block text-white">Жол қозғалысы ережелерін үйрену миссиясы</span>
+        </h2>
+      </div>
+      <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+        Біздің мақсатымыз - жол қозғалысы ережелерін оқу мен түсінуді қазақстандықтар үшін оңай және қолжетімді ету.
+      </p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-20 px-4 relative">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+        <div>
+          <h3 class="text-4xl md:text-5xl font-bold text-gradient mb-6">Біздің миссиямыз</h3>
+          <p class="text-lg text-gray-300 mb-6">
+            PDD Тесттері - бұл жол қозғалысы ережелерін үйренуге арналған инновациялық платформа. Біз емтиханға дайындалуды жеңілдету және жолда қауіпсіздікті арттыру мақсатында құрылдық.
+          </p>
+          <p class="text-lg text-gray-300">
+            Біздің платформада тек ресми сұрақтар ғана емес, сонымен қатар түсіндірмелер мен пайдалы кеңестер де бар.
+          </p>
+        </div>
+        <div class="glass-effect rounded-3xl overflow-hidden card-hover">
+          <img src="img1.jpg" alt="Біздің команда" class="w-full h-auto object-cover">
+        </div>
+      </div>
+
+  <!-- Team Section -->
+  <section class="py-20 px-4 bg-gradient-to-b from-transparent to-indigo-900/30">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <h3 class="text-4xl md:text-5xl font-bold text-gradient mb-6">Автор</h3>
+        <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+          Платформанның негізін қалаушы.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass-effect p-8 rounded-3xl card-hover text-center">
+          <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 overflow-hidden border-4 border-white/20">
+            <img src="seka.jpg" alt="Сәулет Сәтбеков" class="w-full h-full object-cover">
+          </div>
+          <h4 class="text-2xl font-bold text-yellow-300 mb-2">Сейилбек Сауытбеков</h4>
+          <p class="text-gray-400 mb-4">Негізін қалаушы</p>
+          <p class="text-gray-300 text-sm">
+            Жобаны құру идеясының авторы және бастамашысы.
+          </p>
+        </div>
+      </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="glass-effect rounded-3xl p-8 md:p-12">
+        <div class="grid md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-5xl font-bold text-yellow-400 mb-2 counter" data-target="----">0</div>
+            <div class="text-gray-300">Тест сұрақтары</div>
+          </div>
+          <div>
+            <div class="text-5xl font-bold text-yellow-400 mb-2 counter" data-target="7">0</div>
+            <div class="text-gray-300">Тақырыптар</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass-effect py-12 px-4 mt-20">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <img src="logo.png" alt="PDD Logo" class="w-8 h-8 object-contain" />
+            <span class="font-bold text-xl text-gradient">077 PDD </span>
+          </div>
+          <p class="text-gray-300 text-sm">
+            Жол ережелерін үйренудің ең оңай жолы
+          </p>
+        </div>
+        <div>
+          <h5 class="font-semibold mb-3 text-yellow-300">Ақпарат</h5>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href="index.html" class="hover:text-yellow-400 transition">Басты бет</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-semibold mb-3 text-yellow-300">Бізбен байланыс</h5>
+          <div class="flex space-x-4">
+            <a href="https://t.me/+d5N9wYqFwC1lNDUy" class="w-8 h-8 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/sautbekov077" class="w-8 h-8 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center hover:scale-110 transition">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>&copy; 2025 PDD Тесттері | Барлық құқықтар қорғалған, жол белгілері zarul.kz сайтынан алынған.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Counter animation
+    function animateCounter(counter) {
+      const target = parseInt(counter.getAttribute('data-target'));
+      const count = parseInt(counter.innerText);
+      const increment = target / 100;
+      
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(() => animateCounter(counter), 20);
+      } else {
+        counter.innerText = target;
+      }
+    }
+    
+    // Intersection Observer for counters
+    const counters = document.querySelectorAll('.counter');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+    
+    counters.forEach(counter => observer.observe(counter));
+    
+    // Header background change on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('bg-opacity-90');
+      } else {
+        header.classList.remove('bg-opacity-90');
+      }
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+    
+    // Add random particles periodically
+    setInterval(() => {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      document.querySelector('.fixed.inset-0').appendChild(particle);
+      
+      setTimeout(() => {
+        particle.remove();
+      }, 4000);
+    }, 3000);
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu');
+    const nav = document.querySelector('nav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      nav.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
