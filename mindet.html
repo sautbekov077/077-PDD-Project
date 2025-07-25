@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Міндеттілік белгілері – 077 PDD</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 25%, #1e40af 50%, #1e3a8a 75%, #1e1b4b 100%);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    }
+    
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .text-gradient {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: textShine 3s ease-in-out infinite;
+    }
+    
+    @keyframes textShine {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    
+    .option {
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .option::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+    
+    .option:hover::before {
+      left: 100%;
+    }
+    
+    .option:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .selected {
+      background: rgba(251, 191, 36, 0.2) !important;
+      border: 2px solid #fbbf24 !important;
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+    }
+    
+    .correct {
+      background: rgba(34, 197, 94, 0.2) !important;
+      border: 2px solid #22c55e !important;
+    }
+    
+    .incorrect {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border: 2px solid #ef4444 !important;
+    }
+    
+    .morphing-button {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .morphing-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .morphing-button:hover::before {
+      left: 100%;
+    }
+    
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #fbbf24;
+      border-radius: 50%;
+      animation: particleFloat 4s ease-in-out infinite;
+    }
+    
+    @keyframes particleFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+      50% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
+    }
+    
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes pulseGlow {
+      from { text-shadow: 0 0 5px #fbbf24, 0 0 10px #fbbf24, 0 0 15px #fbbf24; }
+      to { text-shadow: 0 0 10px #fbbf24, 0 0 20px #fbbf24, 0 0 30px #fbbf24; }
+    }
+    
+    .progress-bar {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      background: linear-gradient(90deg, #fbbf24, #f59e0b);
+      height: 100%;
+      border-radius: 50px;
+      transition: width 0.5s ease;
+      position: relative;
+    }
+    
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: progressShine 2s ease-in-out infinite;
+    }
+    
+    @keyframes progressShine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    
+    .image-container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo-container {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 60;
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    @media (max-width: 640px) {
+      .option {
+        font-size: 16px;
+        padding: 12px 16px;
+      }
+      
+      .image-container {
+        padding: 15px;
+      }
+      
+      .question-image {
+        width: 120px !important;
+        height: 120px !important;
+      }
+
+      .logo {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body class="gradient-bg text-white min-h-screen overflow-x-hidden">
+  <!-- Logo -->
+  <div class="logo-container">
+    <img id="logo-img" class="logo" src="" alt="Логотип" style="display: none;" />
+  </div>
+
+  <!-- Floating particles -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="particle" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+    <div class="particle" style="top: 70%; left: 20%; animation-delay: 2s;"></div>
+    <div class="particle" style="top: 80%; left: 70%; animation-delay: 3s;"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="fixed top-0 w-full glass-effect z-50 transition-all duration-300" id="header">
+    <div class="flex justify-between items-center px-4 sm:px-6 py-4 max-w-7xl mx-auto ml-20">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"></div>
+        <h1 class="text-lg sm:text-2xl font-bold text-gradient">077 PDD</h1>
+      </div>
+      <a href="index.html" class="glass-effect px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-400 hover:text-indigo-900 transition-all duration-300">
+        ← Басты бетке
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="pt-24 pb-8 px-4 sm:px-6 min-h-screen flex items-center justify-center">
+    <div class="max-w-4xl w-full">
+      
+      <!-- Header Section -->
+      <div class="text-center mb-8 sm:mb-12">
+        <div class="floating">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gradient mb-4 pulse-glow">
+            Міндеттілік белгілері тесті
+          </h1>
+        </div>
+        <p class="text-base sm:text-lg text-gray-300 mb-6">
+          Міндеттілік белгілерін танып, қауіпсіз жүргізушіге айналыңыз
+        </p>
+        
+        <!-- Progress Bar -->
+        <div class="progress-bar h-3 sm:h-4 mb-2">
+          <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+        <p class="text-sm text-gray-400" id="progress-text"> <span id="current-q"></span> / <span id="total-q"></span></p>
+      </div>
+
+      <!-- Question Container -->
+      <div class="glass-effect p-6 sm:p-8 rounded-3xl shadow-2xl card-hover mb-6" id="question-container">
+        <!-- Content loaded by script -->
+      </div>
+
+      <!-- Control Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <button id="prev-btn" class="morphing-button glass-effect text-white font-semibold px-6 py-3 rounded-full hover:scale-105 transition-all duration-300 w-full sm:w-auto" style="display: none;">
+          ← Алдыңғы
+        </button>
+        <button id="next-btn" class="morphing-button bg-gradient-to-r from-yellow-400 to-orange-500 text-indigo-900 font-bold px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 w-full sm:w-auto">
+          Келесі →
+        </button>
+        <button id="finish-btn" class="morphing-button bg-gradient-to-r from-green-400 to-green-600 text-white font-bold px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 w-full sm:w-auto" style="display: none;">
+          Аяқтау ✓
+        </button>
+      </div>
+
+      <!-- Results Section -->
+      <div id="results-container" class="glass-effect p-6 sm:p-8 rounded-3xl shadow-2xl card-hover mt-8" style="display: none;">
+        <!-- Results content loaded by script -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Банк вопросов - каждый вопрос в одной строке: изображение|вопрос|ответ1|ответ2|ответ3|ответ4|правильные_ответы(1100 - первый и второй правильные)
+    const questionsData = `
+401.png||Тек алдыға қозғалыс|Оңға бұрылуға болады|Айналма қозғалыс|Кері бұрылуға рұқсат|1000
+402.png||Оң жаққа қозғалыс|Сол жаққа қозғалыс|Тек алдыға қозғалыс|Кері қозғалысқа рұқсат|1000
+403.png||Сол жаққа қозғалыс|Оң жаққа қозғалыс|Тек алдыға қозғалыс|Айналма қозғалыс|1000
+404.png||Тура немесе оңға қозғалыс|Тек солға қозғалыс|Айналма қозғалыс|Кері қозғалысқа тыйым салынған|1000
+405.png||Тура немесе солға қозғалыс|Тек оңға қозғалыс|Айналма жол|Кері қозғалысқа рұқсат|1000
+406.png||Оңға немесе солға қозғалыс|Тек алдыға қозғалыс|Кері бұрылуға рұқсат|Айналма қозғалыс|1000
+407.png||Кедергіні оң жақпен айналып өту|Кедергіні сол жақпен айналып өту|Тек оңға қозғалыс|Айналма қозғалыс|1000
+408.png||Кедергіні сол жақпен айналып өту|Кедергіні оң жақпен айналып өту|Тек солға қозғалыс|Тек алға қозғалыс|1000
+409.png||Кедергіні оң немесе сол жақпен айналып өту|Тек оң жақпен өтуге болады|Сол жақпен қозғалысқа тыйым салынған|Айналма жолмен жүру міндетті|1000
+410.png||Айналмалы қозғалыс|Тек алға қозғалыс|Солға бұрылуға тыйым салынған|Кері қозғалысқа рұқсат|1000
+411.png||Жеңіл көліктер қозғалысы|Жүк көліктеріне арналған жол|Қоғамдық көлік жолағы|Мотоцикл қозғалысына рұқсат|1000
+412.png||Велосипед жолы|Жаяу жүргіншілер жолағы|Мотоцикл жолы|Қоғамдық көлік жолағы|1000
+413.png||Велосипед жолының соңы|Велосипед жолы|Жаяу жүргіншілер жолы|Қоғамдық көлікке арналған жолақ|1000
+414.png||Жаяу жүргіншілер жолы|Велосипед жолағы|Жол жиегі|Қоғамдық көлік жолы|1000
+415.png||Ең аз жылдамдық|Ең жоғары жылдамдық|Жылдамдықты арттыру|Жылдамдық шектеуі жоқ|1000
+416.png||Ең аз жылдамдықты шектеу аймағының соңы|Ең жоғары жылдамдық|Жылдамдықты шектеу|Жылдамдықты арттыруға рұқсат|1000
+417.png||Қауіпті жүктерді тасымалдайтын көлік құралдарының қозғалыс бағыты|Жеңіл көліктер қозғалысы|Жүк көліктеріне тыйым салынған|Жол қызметі көліктерінің қозғалысы|1000
+
+    `.trim();
+
+    // Функция для парсинга банка вопросов
+    function parseQuestions(data) {
+  return data.split('\n').filter(line => line.trim()).map(line => {
+    const parts = line.split('|');
+    const correctAnswers = parts[6]; // "1000" например
+
+    const answers = [
+      { text: parts[2], correct: correctAnswers[0] === '1' },
+      { text: parts[3], correct: correctAnswers[1] === '1' },
+      { text: parts[4], correct: correctAnswers[2] === '1' },
+      { text: parts[5], correct: correctAnswers[3] === '1' }
+    ];
+
+    return {
+      image: parts[0],
+      question: parts[1],
+      answers: shuffleArray(answers)
+    };
+  });
+}
+
+    // Функция для перемешивания массива (Fisher-Yates shuffle)
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    // Парсим вопросы
+    let questions = shuffleArray(parseQuestions(questionsData));
+
+    let currentIndex = 0;
+    let selectedAnswer = null;
+    let userAnswers = [];
+    let score = 0;
+
+    const totalQuestions = questions.length;
+    document.getElementById('total-q').textContent = totalQuestions;
+
+    // Настройка логотипа (замените на нужный URL или путь к изображению)
+    const logoUrl = 'logo.png'; // Здесь указать путь к логотипу
+    const logoImg = document.getElementById('logo-img');
+    if (logoUrl) {
+      logoImg.src = logoUrl;
+      logoImg.style.display = 'block';
+      logoImg.onerror = function() {
+        this.style.display = 'none';
+      };
+    }
+
+    function updateProgress() {
+      const progress = ((currentIndex) / totalQuestions) * 100;
+      document.getElementById('progress').style.width = progress + '%';
+      document.getElementById('current-q').textContent = currentIndex + 1;
+    }
+
+    function loadQuestion(index) {
+      const q = questions[index];
+      selectedAnswer = null;
+      
+      // Перемешиваем ответы
+      const shuffledAnswers = shuffleArray(q.answers);
+      
+      const container = document.getElementById('question-container');
+      container.innerHTML = `
+        <div class="text-center mb-6">
+          <div class="image-container inline-block mb-6">
+            <img src="${q.image}" alt="Жол белгісі" class="question-image mx-auto w-32 h-32 sm:w-40 sm:h-40 object-contain rounded-xl" 
+                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgdmlld0JveD0iMCAwIDEyOCAxMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiBmaWxsPSIjMzc0MTUxIiByeD0iOCIvPgo8cGF0aCBkPSJNNDAgNDhIMTY4VjgwSDQwVjQ4WiIgZmlsbD0iIzZCNzI4MCIvPgo8cGF0aCBkPSJNNDAgODhIMTI4Vjk2SDQwVjg4WiIgZmlsbD0iIzZCNzI4MCIvPgo8L3N2Zz4='" />
+          </div>
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-300 mb-2">${q.question}</h2>
+          <p class="text-sm sm:text-base text-gray-400">Дұрыс жауапты таңдаңыз</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4" id="answer-options">
+          ${shuffledAnswers
+            .map((ans, i) => `
+              <div class="option glass-effect px-4 py-3 sm:px-6 sm:py-4 rounded-xl border border-white/20 text-base sm:text-lg font-medium transition-all duration-300" 
+                   data-correct="${ans.correct}" data-index="${i}">
+                <div class="flex items-center space-x-3">
+                  <div class="w-6 h-6 rounded-full border-2 border-gray-400 flex items-center justify-center">
+                    <div class="w-3 h-3 rounded-full bg-yellow-400 hidden" id="radio-${i}"></div>
+                  </div>
+                  <span>${ans.text}</span>
+                </div>
+              </div>`).join('')
+          }
+        </div>
+      `;
+
+      // Add click handlers for options
+      document.querySelectorAll('.option').forEach((option, index) => {
+        option.addEventListener('click', () => {
+          // Убираем выделение со всех опций
+          document.querySelectorAll('.option').forEach(el => {
+            el.classList.remove('selected');
+          });
+          document.querySelectorAll('[id^="radio-"]').forEach(radio => {
+            radio.classList.add('hidden');
+          });
+          
+          // Выделяем выбранную опцию
+          option.classList.add('selected');
+          document.querySelector(`#radio-${index}`).classList.remove('hidden');
+          
+          selectedAnswer = option.dataset.correct === 'true';
+          userAnswers[currentIndex] = selectedAnswer;
+        });
+      });
+
+      updateProgress();
+      updateButtons();
+    }
+
+    function updateButtons() {
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const finishBtn = document.getElementById('finish-btn');
+
+      prevBtn.style.display = currentIndex > 0 ? 'block' : 'none';
+      
+      if (currentIndex === totalQuestions - 1) {
+        nextBtn.style.display = 'none';
+        finishBtn.style.display = 'block';
+      } else {
+        nextBtn.style.display = 'block';
+        finishBtn.style.display = 'none';
+      }
+    }
+
+    function showResults() {
+      score = userAnswers.filter(answer => answer === true).length;
+      const percentage = Math.round((score / totalQuestions) * 100);
+      
+      document.getElementById('question-container').style.display = 'none';
+      document.querySelector('.flex.flex-col').style.display = 'none';
+      
+      const resultsContainer = document.getElementById('results-container');
+      resultsContainer.style.display = 'block';
+      
+      let resultMessage = '';
+      let resultColor = '';
+      
+      if (percentage >= 90) {
+        resultMessage = 'Керемет нәтиже!';
+        resultColor = 'text-green-400';
+      } else if (percentage >= 70) {
+        resultMessage = 'Жақсы нәтиже!';
+        resultColor = 'text-yellow-400';
+      } else if (percentage >= 50) {
+        resultMessage = 'Орташа нәтиже';
+        resultColor = 'text-orange-400';
+      } else {
+        resultMessage = 'Одан да жақсы жасай аласыз';
+        resultColor = 'text-red-400';
+      }
+
+      resultsContainer.innerHTML = `
+        <div class="text-center">
+          <div class="floating">
+            <div class="text-6xl mb-4">🏆</div>
+            <h2 class="text-3xl sm:text-4xl font-bold ${resultColor} mb-4 pulse-glow">${resultMessage}</h2>
+          </div>
+          <div class="glass-effect p-6 rounded-2xl mb-6 inline-block">
+            <div class="text-5xl sm:text-6xl font-bold text-gradient mb-2">${score}/${totalQuestions}</div>
+            <div class="text-2xl sm:text-3xl font-semibold text-yellow-300">${percentage}%</div>
+          </div>
+          <p class="text-base sm:text-lg text-gray-300 mb-8 max-w-md mx-auto">
+            Сіз ${totalQuestions} сұрақтың ${score} дұрыс жауап бердіңіз
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button onclick="restartTest()" class="morphing-button bg-gradient-to-r from-blue-400 to-blue-600 text-white font-bold px-8 py-4 rounded-full hover:scale-105 transition-all duration-300">
+              🔄 Қайта өту
+            </button>
+            <a href="index.html" class="morphing-button glass-effect text-white font-semibold px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 inline-block text-center">
+              🏠 Басты бетке
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    function restartTest() {
+  currentIndex = 0;
+  selectedAnswer = null;
+  userAnswers = [];
+  score = 0;
+
+  // 🔁 Перемешиваем вопросы при каждой попытке
+  questions = shuffleArray(parseQuestions(questionsData));
+
+  document.getElementById('question-container').style.display = 'block';
+  document.querySelector('.flex.flex-col').style.display = 'flex';
+  document.getElementById('results-container').style.display = 'none';
+
+  loadQuestion(currentIndex);
+}
+
+    // Event listeners
+    document.getElementById('next-btn').addEventListener('click', () => {
+      if (currentIndex < totalQuestions - 1) {
+        currentIndex++;
+        loadQuestion(currentIndex);
+      }
+    });
+
+    document.getElementById('prev-btn').addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        loadQuestion(currentIndex);
+      }
+    });
+
+    document.getElementById('finish-btn').addEventListener('click', showResults);
+
+    // Header background change on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('bg-opacity-90');
+      } else {
+        header.classList.remove('bg-opacity-90');
+      }
+    });
+
+    // Add random particles periodically
+    setInterval(() => {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      document.querySelector('.fixed.inset-0').appendChild(particle);
+      
+      setTimeout(() => {
+        particle.remove();
+      }, 4000);
+    }, 3000);
+
+    // Initialize
+    loadQuestion(currentIndex);
+  </script>
+
+</body>
+</html>
